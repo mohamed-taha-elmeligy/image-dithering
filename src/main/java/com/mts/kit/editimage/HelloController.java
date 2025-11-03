@@ -32,15 +32,12 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        // تعيين القيمة الافتراضية
         methodCombo.setValue("Ordered Dithering");
 
-        // ربط الـ Slider مع الـ Label
         levelSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             levelLabel.setText(String.valueOf(newVal.intValue()));
         });
 
-        // تعطيل زر التصدير في البداية
         exportBtn.setDisable(true);
         resetBtn.setDisable(true);
     }
@@ -70,19 +67,15 @@ public class HelloController {
                 Image img = SwingFXUtils.toFXImage(currentImage, null);
                 originalImage.setImage(img);
 
-                // إخفاء النص الافتراضي للصورة الأصلية
                 originalPlaceholder.setVisible(false);
                 originalPlaceholder.setManaged(false);
 
-                // مسح الصورة المعالجة السابقة
                 processedImage.setImage(null);
                 processedBufferedImage = null;
 
-                // إظهار النص الافتراضي للصورة المعالجة
                 processedPlaceholder.setVisible(true);
                 processedPlaceholder.setManaged(true);
 
-                // تعطيل زر التصدير وتفعيل زر إعادة التعيين
                 exportBtn.setDisable(true);
                 resetBtn.setDisable(false);
 
@@ -110,13 +103,11 @@ public class HelloController {
         int levels = (int) levelSlider.getValue();
         String method = methodCombo.getValue();
 
-        // إنشاء Progress Dialog
         Alert progressAlert = new Alert(Alert.AlertType.INFORMATION);
         progressAlert.setTitle("معالجة - Processing");
         progressAlert.setHeaderText("جاري معالجة الصورة...\nProcessing image...");
         progressAlert.setContentText("الطريقة: " + method + "\nالمستوى: " + levels);
 
-        // معالجة الصورة في خلفية منفصلة
         Task<BufferedImage> task = new Task<BufferedImage>() {
             @Override
             protected BufferedImage call() throws Exception {
@@ -146,7 +137,6 @@ public class HelloController {
             processedBufferedImage = result;
             processedImage.setImage(SwingFXUtils.toFXImage(result, null));
 
-            // إخفاء النص الافتراضي للصورة المعالجة
             processedPlaceholder.setVisible(false);
             processedPlaceholder.setManaged(false);
 
@@ -163,13 +153,12 @@ public class HelloController {
             task.getException().printStackTrace();
         });
 
-        // عرض الـ Progress Dialog وبدء المعالجة
         new Thread(task).start();
         progressAlert.show();
     }
 
     private BufferedImage orderedDithering(BufferedImage img, int levels) {
-        // Bayer Matrix 4x4
+
         int[][] bayerMatrix = {
                 {0, 8, 2, 10},
                 {12, 4, 14, 6},
@@ -186,7 +175,7 @@ public class HelloController {
                 int r = (rgb >> 16) & 0xFF;
                 int g = (rgb >> 8) & 0xFF;
                 int b = rgb & 0xFF;
-                int gray = (int)(0.299 * r + 0.587 * g + 0.114 * b); // معادلة أفضل للتحويل لرمادي
+                int gray = (int)(0.299 * r + 0.587 * g + 0.114 * b);
 
                 int threshold = (bayerMatrix[y % 4][x % 4] * 16);
                 int newGray = ((gray + threshold) / step) * step;
@@ -307,16 +296,13 @@ public class HelloController {
 
     @FXML
     private void resetImage() {
-        // مسح الصورة المعالجة فقط
         processedImage.setImage(null);
         processedBufferedImage = null;
         exportBtn.setDisable(true);
 
-        // إظهار النص الافتراضي للصورة المعالجة
         processedPlaceholder.setVisible(true);
         processedPlaceholder.setManaged(true);
 
-        // إذا لم تكن هناك صورة أصلية، تعطيل زر إعادة التعيين
         if (currentImage == null) {
             resetBtn.setDisable(true);
         }
@@ -335,9 +321,8 @@ public class HelloController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.show(); // استخدام show بدلاً من showAndWait لعدم حظر التطبيق
+        alert.show();
 
-        // إغلاق تلقائي بعد 2 ثانية
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
