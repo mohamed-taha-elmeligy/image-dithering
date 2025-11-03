@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mts.kit.editimage.Starter">
+   <children>
+      <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#goToDashboardEnter" onMouseClicked="#goToDashboard" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #081827;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageStart" fitHeight="386.0" fitWidth="590.0" pickOnBounds="true" preserveRatio="true" />
+
+            <!-- Branding Container -->
+            <VBox fx:id="brandingContainer" alignment="CENTER" spacing="15" visible="false" StackPane.alignment="CENTER">
+               <!-- Slogan -->
+               <Label fx:id="sloganLabel" text="تطبيق يناسب طموحك" textFill="#ffffff99">
+                  <font>
+                     <Font name="System" size="22.0" />
+                  </font>
+                  <effect>
+                     <DropShadow color="#00000060" offsetX="2" offsetY="2" radius="5" />
+                  </effect>
+               </Label>
+            </VBox>
+            <ProgressIndicator fx:id="loadingIndicator" prefHeight="50.0" prefWidth="50.0" style="-fx-progress-color: #ffffff;" visible="true" />
+         </children>
+      </StackPane>
+
+      <Button fx:id="button" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onKeyPressed="#goToDashboardEnter" onMouseClicked="#goToDashboard" style="-fx-background-color: #00000000; -fx-border-color: transparent; -fx-cursor: hand;" text="اضغط علي الشاشة للاستمرار" textFill="#ffffff3d" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+         <font>
+            <Font size="38.0" />
+         </font>
+         <effect>
+            <DropShadow color="#000000" offsetX="2" offsetY="2" radius="5" />
+         </effect>
+      </Button>
+
+      <Label fx:id="errorLabel" alignment="CENTER" prefHeight="50.0" text="حدث خطأ في التحميل" textFill="#ff4444" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+
+      <!-- Copyright Footer -->
+      <Label fx:id="copyrightLabel" alignment="CENTER" text="Mohamed Taha © 2025   Powered by eMTSP" textFill="#ffffff99" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="System" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow color="#00000040" offsetX="1" offsetY="1" radius="3" />
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
