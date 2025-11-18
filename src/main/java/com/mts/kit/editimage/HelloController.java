@@ -230,7 +230,6 @@ public class HelloController {
                 newGray = Math.min(255, Math.max(0, newGray));
                 int error = gray - newGray;
 
-                // Floyd-Steinberg error diffusion
                 if (x + 1 < img.getWidth())
                     errors[y][x + 1] += error * 7 / 16;
 
